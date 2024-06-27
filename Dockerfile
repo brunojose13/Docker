@@ -25,5 +25,3 @@ RUN apt-get update && apt-get install -y \
 # RUN docker-php-ext-install pdo_sqlite
 
 COPY --from=composer/composer:latest-bin /composer /usr/bin/composer
-
-EXPOSE 8080
