@@ -8,13 +8,13 @@ services:
     env_file:
       - .env
     environment:
-      MYSQL_HOST: ${MYSQL_HOST}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_HOST: ${DB_HOST}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     ports:
-      - "3305:3306"
+      - "${DB_PORT}:3306"
     volumes:
       - database_rental:/var/lib/mysql
     networks:
@@ -24,6 +24,8 @@ services:
     container_name: php
     volumes:
       - ./:/usr/src/app
+    ports:
+      - "8000:8000"
     depends_on:
       - db
     networks:
