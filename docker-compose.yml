@@ -14,27 +14,27 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     ports:
-      - "3307:3306"
+      - "3305:3306"
     volumes:
-      - rental_company_db:/var/lib/mysql
+      - database_rental:/var/lib/mysql
     networks:
-      - backend_rental_company
+      - back_rental
   app:
     build: .
     container_name: php
-    ports:
-      - "80:80"
+    volumes:
+      - ./:/usr/src/app
     depends_on:
       - db
     networks:
-      - backend_rental_company
+      - back_rental
 
 volumes:
-  rental_company_db:
-    name: rental_company_db
+  database_rental:
+    name: database_rental
     driver: local
 
 networks:
-  backend_rental_company:
-    name: backend_rental_company
+  back_rental:
+    name: back_rental
     driver: bridge
